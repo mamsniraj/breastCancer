@@ -1,0 +1,730 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cancer Features Form</title>
+{% block content %}
+<style>
+  
+  #form-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin: 30px auto; /* Center the form horizontally */
+    max-width: 1200px; /* Limit the maximum width of the form */
+    }
+  .div1 {
+    width: calc(50% - 10px);
+    float: left; 
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+  }
+  .div2 {
+    width: calc(50% - 10px );
+    float: right; 
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+}
+
+  .form-group input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+
+  .btn-container {
+    text-align: center; 
+    margin-top: 20px;
+  }
+
+  .btn {
+    padding: 15px;
+    display: block;
+    margin:auto;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 20px;
+  }
+
+  .btn:hover {
+    background-color: #45a049;
+  }
+</style>
+<script>
+    function validateForm() {
+        var validationPassed = true;
+
+        // Validation for radius_mean
+        var radius_mean_input = document.getElementById("radius_mean").value;
+        var radius_mean = parseFloat(radius_mean_input);
+
+        // Round off the input value to 6 decimal places
+        var rounded_radius_mean = parseFloat(radius_mean_input).toFixed(6);
+
+        // Check if the rounded value is within the desired range
+        if (isNaN(radius_mean) || rounded_radius_mean < 6.981 || rounded_radius_mean > 28.11) {
+            document.getElementById("radius_mean").classList.add("error");
+            validationPassed = false;
+        } else {
+            document.getElementById("radius_mean").classList.remove("error");
+        }
+
+        // Validation for texture_mean
+        var texture_mean_input = document.getElementById("texture_mean").value;
+        var texture_mean = parseFloat(texture_mean_input);
+
+        // Round off the input value to 6 decimal places
+        var rounded_texture_mean = parseFloat(texture_mean_input).toFixed(6);
+
+        // Check if the rounded value is within the desired range
+        if (isNaN(texture_mean) || rounded_texture_mean < 9.71 || rounded_texture_mean > 39.28) {
+            document.getElementById("texture_mean").classList.add("error");
+            validationPassed = false;
+        } else {
+            document.getElementById("texture_mean").classList.remove("error");
+        }
+
+
+        // Validation for perimeter_mean
+        var perimeter_mean_input = document.getElementById("perimeter_mean").value;
+        var perimeter_mean = parseFloat(perimeter_mean_input);
+
+        // Round off the input value to 6 decimal places
+        var rounded_perimeter_mean = parseFloat(perimeter_mean_input).toFixed(6);
+
+        // Check if the rounded value is within the desired range
+        if (isNaN(perimeter_mean) || rounded_perimeter_mean < 43.79 || rounded_perimeter_mean > 188.5) {
+            document.getElementById("perimeter_mean").classList.add("error");
+            validationPassed = false;
+        } else {
+            document.getElementById("perimeter_mean").classList.remove("error");
+        }
+
+        // Validation for area_mean
+        var area_mean_input = document.getElementById("area_mean").value;
+        var area_mean = parseFloat(area_mean_input);
+
+        // Round off the input value to 6 decimal places
+        var rounded_area_mean = parseFloat(area_mean_input).toFixed(6);
+
+        // Check if the rounded value is within the desired range
+        if (isNaN(area_mean) || rounded_area_mean < 143.5 || rounded_area_mean > 2501.0) {
+            document.getElementById("area_mean").classList.add("error");
+            validationPassed = false;
+        } else {
+            document.getElementById("area_mean").classList.remove("error");
+        }
+
+
+        // Validation for smoothness_mean
+        var smoothness_mean_input = document.getElementById("smoothness_mean").value;
+        var smoothness_mean = parseFloat(smoothness_mean_input);
+
+        // Round off the input value to 6 decimal places
+        var rounded_smoothness_mean = parseFloat(smoothness_mean_input).toFixed(6);
+
+        // Check if the rounded value is within the desired range
+        if (isNaN(smoothness_mean) || rounded_smoothness_mean < 0.05263 || rounded_smoothness_mean > 0.1634) {
+            document.getElementById("smoothness_mean").classList.add("error");
+            validationPassed = false;
+        } else {
+            document.getElementById("smoothness_mean").classList.remove("error");
+        }
+
+        // Validation for compactness_mean
+        var compactness_mean_input = document.getElementById("compactness_mean").value;
+        var compactness_mean = parseFloat(compactness_mean_input);
+
+        // Round off the input value to 6 decimal places
+        var rounded_compactness_mean = parseFloat(compactness_mean_input).toFixed(6);
+
+        // Check if the rounded value is within the desired range
+        if (isNaN(compactness_mean) || rounded_compactness_mean < 0.01938 || rounded_compactness_mean > 0.3454) {
+            document.getElementById("compactness_mean").classList.add("error");
+            validationPassed = false;
+        } else {
+            document.getElementById("compactness_mean").classList.remove("error");
+        }
+
+
+        // Validation for concavity_mean
+        var concavity_mean_input = document.getElementById("concavity_mean").value;
+        var concavity_mean = parseFloat(concavity_mean_input);
+
+        // Round off the input value to 6 decimal places
+        var rounded_concavity_mean = parseFloat(concavity_mean_input).toFixed(6);
+
+        // Check if the rounded value is within the desired range
+        if (isNaN(concavity_mean) || rounded_concavity_mean < 0.0 || rounded_concavity_mean > 0.4268) {
+            document.getElementById("concavity_mean").classList.add("error");
+            validationPassed = false;
+        } else {
+            document.getElementById("concavity_mean").classList.remove("error");
+        }
+
+        // Validation for concave_points_mean
+        var concave_points_mean_input = document.getElementById("concave_points_mean").value;
+        var concave_points_mean = parseFloat(concave_points_mean_input);
+
+        // Round off the input value to 6 decimal places
+        var rounded_concave_points_mean = parseFloat(concave_points_mean_input).toFixed(6);
+
+        // Check if the rounded value is within the desired range
+        if (isNaN(concave_points_mean) || rounded_concave_points_mean < 0.0 || rounded_concave_points_mean > 0.2012) {
+            document.getElementById("concave_points_mean").classList.add("error");
+            validationPassed = false;
+        } else {
+            document.getElementById("concave_points_mean").classList.remove("error");
+        }
+
+
+        // Validation for symmetry_mean
+        var symmetry_mean_input = document.getElementById("symmetry_mean").value;
+        var symmetry_mean = parseFloat(symmetry_mean_input);
+
+        // Round off the input value to 6 decimal places
+        var rounded_symmetry_mean = parseFloat(symmetry_mean_input).toFixed(6);
+
+        // Check if the rounded value is within the desired range
+        if (isNaN(symmetry_mean) || rounded_symmetry_mean < 0.106 || rounded_symmetry_mean > 0.304) {
+            document.getElementById("symmetry_mean").classList.add("error");
+            validationPassed = false;
+        } else {
+            document.getElementById("symmetry_mean").classList.remove("error");
+        }
+
+        // Validation for fractal_dimension_mean
+        var fractal_dimension_mean_input = document.getElementById("fractal_dimension_mean").value;
+        var fractal_dimension_mean = parseFloat(fractal_dimension_mean_input);
+
+        // Round off the input value to 6 decimal places
+        var rounded_fractal_dimension_mean = parseFloat(fractal_dimension_mean_input).toFixed(6);
+
+        // Check if the rounded value is within the desired range
+        if (isNaN(fractal_dimension_mean) || rounded_fractal_dimension_mean < 0.04996 || rounded_fractal_dimension_mean > 0.09744) {
+            document.getElementById("fractal_dimension_mean").classList.add("error");
+            validationPassed = false;
+        } else {
+            document.getElementById("fractal_dimension_mean").classList.remove("error");
+        }
+
+
+        // Validation for radius_se
+        var radius_se_input = document.getElementById("radius_se").value;
+        var radius_se = parseFloat(radius_se_input);
+
+        // Round off the input value to 6 decimal places
+        var rounded_radius_se = parseFloat(radius_se_input).toFixed(6);
+
+        // Check if the rounded value is within the desired range
+        if (isNaN(radius_se) || rounded_radius_se < 0.1115 || rounded_radius_se > 2.873) {
+            document.getElementById("radius_se").classList.add("error");
+            validationPassed = false;
+        } else {
+            document.getElementById("radius_se").classList.remove("error");
+        }
+
+        // Validation for texture_se
+        var texture_se_input = document.getElementById("texture_se").value;
+        var texture_se = parseFloat(texture_se_input);
+
+        // Round off the input value to 6 decimal places
+        var rounded_texture_se = parseFloat(texture_se_input).toFixed(6);
+
+        // Check if the rounded value is within the desired range
+        if (isNaN(texture_se) || rounded_texture_se < 0.3602 || rounded_texture_se > 4.885) {
+            document.getElementById("texture_se").classList.add("error");
+            validationPassed = false;
+        } else {
+            document.getElementById("texture_se").classList.remove("error");
+        }
+
+
+        // Validation for perimeter_se
+        var perimeter_se_input = document.getElementById("perimeter_se").value;
+        var perimeter_se = parseFloat(perimeter_se_input);
+
+        // Round off the input value to 6 decimal places
+        var rounded_perimeter_se = parseFloat(perimeter_se_input).toFixed(6);
+
+        // Check if the rounded value is within the desired range
+        if (isNaN(perimeter_se) || rounded_perimeter_se < 0.757 || rounded_perimeter_se > 21.98) {
+            document.getElementById("perimeter_se").classList.add("error");
+            validationPassed = false;
+        } else {
+            document.getElementById("perimeter_se").classList.remove("error");
+        }
+
+        // Validation for area_se
+        var area_se_input = document.getElementById("area_se").value;
+        var area_se = parseFloat(area_se_input);
+
+        // Round off the input value to 6 decimal places
+        var rounded_area_se = parseFloat(area_se_input).toFixed(6);
+
+        // Check if the rounded value is within the desired range
+        if (isNaN(area_se) || rounded_area_se < 6.802 || rounded_area_se > 542.2) {
+            document.getElementById("area_se").classList.add("error");
+            validationPassed = false;
+        } else {
+            document.getElementById("area_se").classList.remove("error");
+        }
+
+
+        // Validation for smoothness_se
+        var smoothness_se_input = document.getElementById("smoothness_se").value;
+        var smoothness_se = parseFloat(smoothness_se_input);
+
+        // Round off the input value to 6 decimal places
+        var rounded_smoothness_se = parseFloat(smoothness_se_input).toFixed(6);
+
+        // Check if the rounded value is within the desired range
+        if (isNaN(smoothness_se) || rounded_smoothness_se < 0.001713 || rounded_smoothness_se > 0.03113) {
+            document.getElementById("smoothness_se").classList.add("error");
+            validationPassed = false;
+        } else {
+            document.getElementById("smoothness_se").classList.remove("error");
+        }
+
+        // Validation for compactness_se
+        var compactness_se_input = document.getElementById("compactness_se").value;
+        var compactness_se = parseFloat(compactness_se_input);
+
+        // Round off the input value to 6 decimal places
+        var rounded_compactness_se = parseFloat(compactness_se_input).toFixed(6);
+
+        // Check if the rounded value is within the desired range
+        if (isNaN(compactness_se) || rounded_compactness_se < 0.002252 || rounded_compactness_se > 0.1354) {
+            document.getElementById("compactness_se").classList.add("error");
+            validationPassed = false;
+        } else {
+            document.getElementById("compactness_se").classList.remove("error");
+        }
+
+
+        // Validation for concavity_se
+        var concavity_se_input = document.getElementById("concavity_se").value;
+        var concavity_se = parseFloat(concavity_se_input);
+
+        // Round off the input value to 6 decimal places
+        var rounded_concavity_se = parseFloat(concavity_se_input).toFixed(6);
+
+        // Check if the rounded value is within the desired range
+        if (isNaN(concavity_se) || rounded_concavity_se < 0.0 || rounded_concavity_se > 0.396) {
+            document.getElementById("concavity_se").classList.add("error");
+            validationPassed = false;
+        } else {
+            document.getElementById("concavity_se").classList.remove("error");
+        }
+
+        // Validation for concave_points_se
+        var concave_points_se_input = document.getElementById("concave_points_se").value;
+        var concave_points_se = parseFloat(concave_points_se_input);
+
+        // Round off the input value to 6 decimal places
+        var rounded_concave_points_se = parseFloat(concave_points_se_input).toFixed(6);
+
+        // Check if the rounded value is within the desired range
+        if (isNaN(concave_points_se) || rounded_concave_points_se < 0.0 || rounded_concave_points_se > 0.05279) {
+            document.getElementById("concave_points_se").classList.add("error");
+            validationPassed = false;
+        } else {
+            document.getElementById("concave_points_se").classList.remove("error");
+        }
+
+
+        // Validation for symmetry_se
+        var symmetry_se_input = document.getElementById("symmetry_se").value;
+        var symmetry_se = parseFloat(symmetry_se_input);
+
+        // Round off the input value to 6 decimal places
+        var rounded_symmetry_se = parseFloat(symmetry_se_input).toFixed(6);
+
+        // Check if the rounded value is within the desired range
+        if (isNaN(symmetry_se) || rounded_symmetry_se < 0.007882 || rounded_symmetry_se > 0.07895) {
+            document.getElementById("symmetry_se").classList.add("error");
+            validationPassed = false;
+        } else {
+            document.getElementById("symmetry_se").classList.remove("error");
+        }
+
+        // Validation for fractal_dimension_se
+        var fractal_dimension_se_input = document.getElementById("fractal_dimension_se").value;
+        var fractal_dimension_se = parseFloat(fractal_dimension_se_input);
+
+        // Round off the input value to 6 decimal places
+        var rounded_fractal_dimension_se = parseFloat(fractal_dimension_se_input).toFixed(6);
+
+        // Check if the rounded value is within the desired range
+        if (isNaN(fractal_dimension_se) || rounded_fractal_dimension_se < 0.0008948 || rounded_fractal_dimension_se > 0.02984) {
+            document.getElementById("fractal_dimension_se").classList.add("error");
+            validationPassed = false;
+        } else {
+            document.getElementById("fractal_dimension_se").classList.remove("error");
+        }
+
+
+        // Validation for radius_worst
+        var radius_worst_input = document.getElementById("radius_worst").value;
+        var radius_worst = parseFloat(radius_worst_input);
+
+        // Round off the input value to 6 decimal places
+        var rounded_radius_worst = parseFloat(radius_worst_input).toFixed(6);
+
+        // Check if the rounded value is within the desired range
+        if (isNaN(radius_worst) || rounded_radius_worst < 7.93 || rounded_radius_worst > 36.04) {
+            document.getElementById("radius_worst").classList.add("error");
+            validationPassed = false;
+        } else {
+            document.getElementById("radius_worst").classList.remove("error");
+        }
+
+        // Validation for texture_worst
+        var texture_worst_input = document.getElementById("texture_worst").value;
+        var texture_worst = parseFloat(texture_worst_input);
+
+        // Round off the input value to 6 decimal places
+        var rounded_texture_worst = parseFloat(texture_worst_input).toFixed(6);
+
+        // Check if the rounded value is within the desired range
+        if (isNaN(texture_worst) || rounded_texture_worst < 12.02 || rounded_texture_worst > 49.54) {
+            document.getElementById("texture_worst").classList.add("error");
+            validationPassed = false;
+        } else {
+            document.getElementById("texture_worst").classList.remove("error");
+        }
+
+
+        // Validation for perimeter_worst
+        var perimeter_worst_input = document.getElementById("perimeter_worst").value;
+        var perimeter_worst = parseFloat(perimeter_worst_input);
+
+        // Round off the input value to 6 decimal places
+        var rounded_perimeter_worst = parseFloat(perimeter_worst_input).toFixed(6);
+
+        // Check if the rounded value is within the desired range
+        if (isNaN(perimeter_worst) || rounded_perimeter_worst < 50.41 || rounded_perimeter_worst > 251.2) {
+            document.getElementById("perimeter_worst").classList.add("error");
+            validationPassed = false;
+        } else {
+            document.getElementById("perimeter_worst").classList.remove("error");
+        }
+
+        // Validation for area_worst
+        var area_worst_input = document.getElementById("area_worst").value;
+        var area_worst = parseFloat(area_worst_input);
+
+        // Round off the input value to 6 decimal places
+        var rounded_area_worst = parseFloat(area_worst_input).toFixed(6);
+
+        // Check if the rounded value is within the desired range
+        if (isNaN(area_worst) || rounded_area_worst < 0.2 || rounded_area_worst > 4254.0) {
+            document.getElementById("area_worst").classList.add("error");
+            validationPassed = false;
+        } else {
+            document.getElementById("area_worst").classList.remove("error");
+        }
+
+
+        // Validation for smoothness_worst
+        var smoothness_worst_input = document.getElementById("smoothness_worst").value;
+        var smoothness_worst = parseFloat(smoothness_worst_input);
+
+        // Round off the input value to 6 decimal places
+        var rounded_smoothness_worst = parseFloat(smoothness_worst_input).toFixed(6);
+
+        // Check if the rounded value is within the desired range
+        if (isNaN(smoothness_worst) || rounded_smoothness_worst < 0.07117 || rounded_smoothness_worst > 0.2226) {
+            document.getElementById("smoothness_worst").classList.add("error");
+            validationPassed = false;
+        } else {
+            document.getElementById("smoothness_worst").classList.remove("error");
+        }
+
+        // Validation for compactness_worst
+        var compactness_worst_input = document.getElementById("compactness_worst").value;
+        var compactness_worst = parseFloat(compactness_worst_input);
+
+        // Round off the input value to 6 decimal places
+        var rounded_compactness_worst = parseFloat(compactness_worst_input).toFixed(6);
+
+        // Check if the rounded value is within the desired range
+        if (isNaN(compactness_worst) || rounded_compactness_worst < 0.02729 || rounded_compactness_worst > 1.058) {
+            document.getElementById("compactness_worst").classList.add("error");
+            validationPassed = false;
+        } else {
+            document.getElementById("compactness_worst").classList.remove("error");
+        }
+
+        // Validation for concavity_worst
+        var concavity_worst_input = document.getElementById("concavity_worst").value;
+        var concavity_worst = parseFloat(concavity_worst_input);
+
+        // Round off the input value to 6 decimal places
+        var rounded_concavity_worst = parseFloat(concavity_worst_input).toFixed(6);
+
+        // Check if the rounded value is within the desired range
+        if (isNaN(concavity_worst) || rounded_concavity_worst < 0.0 || rounded_concavity_worst > 1.252) {
+            document.getElementById("concavity_worst").classList.add("error");
+            validationPassed = false;
+        } else {
+            document.getElementById("concavity_worst").classList.remove("error");
+        }
+
+        // Validation for concave_points_worst
+        var concave_points_worst_input = document.getElementById("concave_points_worst").value;
+        var concave_points_worst = parseFloat(concave_points_worst_input);
+
+        // Round off the input value to 6 decimal places
+        var rounded_concave_points_worst = parseFloat(concave_points_worst_input).toFixed(6);
+
+        // Check if the rounded value is within the desired range
+        if (isNaN(concave_points_worst) || rounded_concave_points_worst < 0.0 || rounded_concave_points_worst > 0.291) {
+            document.getElementById("concave_points_worst").classList.add("error");
+            validationPassed = false;
+        } else {
+            document.getElementById("concave_points_worst").classList.remove("error");
+        }
+
+
+        // Validation for symmetry_worst
+        var symmetry_worst_input = document.getElementById("symmetry_worst").value;
+        var symmetry_worst = parseFloat(symmetry_worst_input);
+
+        // Round off the input value to 6 decimal places
+        var rounded_symmetry_worst = parseFloat(symmetry_worst_input).toFixed(6);
+
+        // Check if the rounded value is within the desired range
+        if (isNaN(symmetry_worst) || rounded_symmetry_worst < 0.1565 || rounded_symmetry_worst > 0.6638) {
+            document.getElementById("symmetry_worst").classList.add("error");
+            validationPassed = false;
+        } else {
+            document.getElementById("symmetry_worst").classList.remove("error");
+        }
+
+
+        // Validation for fractal_dimension_worst
+        var fractal_dimension_worst_input = document.getElementById("fractal_dimension_worst").value;
+        var fractal_dimension_worst = parseFloat(fractal_dimension_worst_input);
+
+        // Round off the input value to 6 decimal places
+        var rounded_fractal_dimension_worst = parseFloat(fractal_dimension_worst_input).toFixed(6);
+
+        // Check if the rounded value is within the desired range
+        if (isNaN(fractal_dimension_worst) || rounded_fractal_dimension_worst < 0.05504 || rounded_fractal_dimension_worst >= 0.2075) {
+            document.getElementById("fractal_dimension_worst").classList.add("error");
+            validationPassed = false;
+        } else {
+            document.getElementById("fractal_dimension_worst").classList.remove("error");
+        }
+
+
+
+        if (validationPassed) {
+            //alert("Form validation successful. Proceeding...");
+        } else {
+            alert("Form validation failed. Please correct the values.");
+        }
+
+        return validationPassed;
+    }
+</script>
+</head>
+<body>
+    <u><h2> Breast Cancer Input Features / Values :</h2></u>
+<div id="form-container">
+  
+  <form action="/detection/" method="post" onsubmit="return validateForm();">
+    {% csrf_token %}
+
+
+    <div class="div1">
+
+        <div class="form-group">
+            <label for="radius_mean">Radius Mean:</label>
+            <input type="number" id="radius_mean" name="radius_mean" min="0.0" max="500.000000" step="any">
+        </div>
+
+        <div class="form-group">
+            <label for="texture_mean">Texture Mean:</label>
+            <input type="number" id="texture_mean" name="texture_mean" min="0.0" max="500.000000" step="any">
+        </div>
+
+        <div class="form-group">
+            <label for="perimeter_mean">Perimeter Mean:</label>
+            <input type="number" id="perimeter_mean" name="perimeter_mean" min="0.0" max="500" step="any">
+        </div>
+
+        <div class="form-group">
+            <label for="area_mean">Area Mean:</label>
+            <input type="number" id="area_mean" name="area_mean" min="0.0" max="5000" step="any">
+        </div>
+
+        <div class="form-group">
+            <label for="smoothness_mean">Smoothness Mean:</label>
+            <input type="number" id="smoothness_mean" name="smoothness_mean" min="0.000000" max="1.999999" step="0.000001">
+        </div>
+
+        <div class="form-group">
+            <label for="compactness_mean">Compactness Mean:</label>
+            <input type="number" id="compactness_mean" name="compactness_mean" min="0.000000" max="1.999999" step="0.000001">
+        </div>
+
+        <div class="form-group">
+            <label for="concavity_mean">Concavity Mean:</label>
+            <input type="number" id="concavity_mean" name="concavity_mean" min="0.000000" max="1.999999" step="0.000001">
+        </div>
+
+        <div class="form-group">
+            <label for="concave_points_mean">Concave Points Mean:</label>
+            <input type="number" id="concave_points_mean" name="concave_points_mean" min="0.000000" max="1.999999" step="0.000001">
+        </div>
+
+        <div class="form-group">
+            <label for="symmetry_mean">Symmetry Mean:</label>
+            <input type="number" id="symmetry_mean" name="symmetry_mean" min="0.000000" max="1.999999" step="0.000001">
+        </div>
+
+        <div class="form-group">
+            <label for="fractal_dimension_mean">Fractal Dimension Mean:</label>
+            <input type="number" id="fractal_dimension_mean" name="fractal_dimension_mean" min="0.000000" max="1.999999" step="0.000001">
+        </div>
+
+        <div class="form-group">
+            <label for="radius_se">Radius SE:</label>
+            <input type="number" id="radius_se" name="radius_se" min="0.0" max="500" step="any">
+        </div>
+
+        <div class="form-group">
+            <label for="texture_se">Texture SE:</label>
+            <input type="number" id="texture_se" name="texture_se" min="0.0" max="500" step="any">
+        </div>
+
+        <div class="form-group">
+            <label for="perimeter_se">Perimeter SE:</label>
+            <input type="number" id="perimeter_se" name="perimeter_se" min="0.0" max="500" step="any">
+        </div>
+
+        <div class="form-group">
+            <label for="area_se">Area SE:</label>
+            <input type="number" id="area_se" name="area_se" min="0.01" max="5000" step="any">
+        </div>
+
+        <div class="form-group">
+            <label for="smoothness_se">Smoothness SE:</label>
+            <input type="number" id="smoothness_se" name="smoothness_se" min="0.000000" max="1.999999" step="0.000001">
+        </div>
+
+    </div>
+
+
+    <div class="div2">
+        
+        <div class="form-group">
+            <label for="compactness_se">Compactness SE:</label>
+            <input type="number" id="compactness_se" name="compactness_se" min="0.000000" max="1.999999" step="0.000001">
+        </div>
+
+        <div class="form-group">
+            <label for="concavity_se">Concavity SE:</label>
+            <input type="number" id="concavity_se" name="concavity_se" min="0.000000" max="1.999999" step="0.000001">
+        </div>
+
+        <div class="form-group">
+            <label for="concave_points_se">Concave Points SE:</label>
+            <input type="number" id="concave_points_se" name="concave_points_se" min="0.000000" max="1.999999" step="0.000001">
+        </div>
+
+        <div class="form-group">
+            <label for="symmetry_se">Symmetry SE:</label>
+            <input type="number" id="symmetry_se" name="symmetry_se" min="0.000000" max="1.999999" step="0.000001">
+        </div>
+
+        <div class="form-group">
+            <label for="fractal_dimension_se">Fractal Dimension SE:</label>
+            <input type="number" id="fractal_dimension_se" name="fractal_dimension_se" min="0.000000" max="1.999999" step="0.000001">
+        </div>
+
+        <div class="form-group">
+            <label for="radius_worst">Radius Worst:</label>
+            <input type="number" id="radius_worst" name="radius_worst" min="0.01" max="500" step="any">
+        </div>
+
+        <div class="form-group">
+            <label for="texture_worst">Texture Worst:</label>
+            <input type="number" id="texture_worst" name="texture_worst" min="0.01" max="500" step="any">
+        </div>
+
+        <div class="form-group">
+            <label for="perimeter_worst">Perimeter Worst:</label>
+            <input type="number" id="perimeter_worst" name="perimeter_worst" min="0.01" max="500" step="any">
+        </div>
+
+        <div class="form-group">
+            <label for="area_worst">Area Worst:</label>
+            <input type="number" id="area_worst" name="area_worst" min="0.01" max="5000" step="any">
+        </div>
+
+        <div class="form-group">
+            <label for="smoothness_worst">Smoothness Worst:</label>
+            <input type="number" id="smoothness_worst" name="smoothness_worst" min="0.000000" max="1.999999" step="0.000001">
+        </div>
+        
+        <div class="form-group">
+          <label for="compactness_worst">Compactness Worst:</label>
+          <input type="number" id="compactness_worst" name="compactness_worst" min="0.000000" max="1.999999" step="0.000001">
+        </div>
+
+        <div class="form-group">
+          <label for="concavity_worst">Concavity Worst:</label>
+          <input type="number" id="concavity_worst" name="concavity_worst" min="0.000000" max="1.999999" step="0.000001">
+        </div>
+
+        <div class="form-group">
+            <label for="concave_points_worst">Concave Points Worst:</label>
+            <input type="number" id="concave_points_worst" name="concave_points_worst" min="0.000000" max="1.999999" step="0.000001">
+        </div>
+        
+
+        <div class="form-group">
+          <label for="symmetry_worst">Symmetry Worst:</label>
+          <input type="number" id="symmetry_worst" name="symmetry_worst" min="0.000000" max="1.999999" step="0.000001">
+        </div>
+        
+        <div class="form-group">
+            <label for="fractal_dimension_worst">Fractal Dimension Worst:</label>
+            <input type="number" id="fractal_dimension_worst" name="fractal_dimension_worst" min="0.000000" max="1.999999" step="0.000001">
+        </div>
+
+
+     </div>
+
+
+    <div>
+         <button type="submit" class="btn">See Prediction, Accuracy, CM </button>
+    </div>
+
+    </form>
+  
+  </div>
+  </body>
+  {% endblock content %}
+  </html>
+
