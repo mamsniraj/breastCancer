@@ -1,9 +1,9 @@
-# breastCancer
-project
+# breastCancer Project
 
+To get started, follow these steps:
 
-activate environment : env\Scripts\activate
-run : python manage.py runserver
-admin: python manage.py createsuperuser
+1. Activate environment: `env\Scripts\activate`
+2. Run the server: `python manage.py runserver`
+3. Create admin user: `python manage.py createsuperuser`
 
-<link a href="https://www.facebook.com/nirajmams.1999/">Facebook mams</link>
+[Facebook mams](https://www.facebook.com/nirajmams.1999/)
