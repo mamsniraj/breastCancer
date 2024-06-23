@@ -6,8 +6,11 @@ To get started, follow these steps:
 2. Run the server: `python manage.py runserver`
 3. Create admin user: `python manage.py createsuperuser`
 
-[Facebook mams](https://www.facebook.com/nirajmams.1999/)
+### Contact
 
-[LinkedIn mams](linkedin.com/in/niraj-karki-923a622ab)
+- LinkedIn: [Niraj Karki](https://www.linkedin.com/in/niraj-karki-923a622ab/)
+- Gmail: [nirajmams@gmail.com](mailto:nirajmams@gmail.com)
 
-[Gmail mans](nirajmams@gmail.com)
+### Social Media
+
+- Facebook: [Niraj Mams](https://www.facebook.com/nirajmams.1999/)
